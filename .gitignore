@@ -1,0 +1,20 @@
+# IntelliJ IDEA files
+.idea/
+*.iml
+*.iws
+
+# Compiled class files
+*.class
+
+# Log files
+*.log
+
+# Gradle or Maven build files
+.gradle/
+target/
+build/
+
+# Other ignored files
+*.bak
+*.swp
+*.swo
