@@ -9,6 +9,8 @@ public class PlaintextCiphertextPair {
     public PlaintextCiphertextPair(String plaintext, String ciphertext) {
         Objects.requireNonNull(plaintext);
         Objects.requireNonNull(ciphertext);
+        if (plaintext.length() != 8 || ciphertext.length() != 8)
+            throw new IllegalArgumentException("Plaintext and ciphertext must be exactly 8 bits each");
         this.plaintext = plaintext;
         this.ciphertext = ciphertext;
     }

@@ -58,9 +58,9 @@ public class SdesUtility {
 
         // Various fixed permutations that are constant in the SDES algorithm
         final int[] ip = {1, 5, 2, 0, 3, 7, 4, 6};
-        final int[] ipinv = {3, 0, 2, 4, 6, 1, 7, 5};
-        final int[] p8 = {0, 1, 5, 2, 6, 3, 7, 4, 9, 8};
-        final int[] p10 = {2, 4, 1, 6, 3, 9, 0, 8, 7, 5};
+        final int[] ip_inverse = {3, 0, 2, 4, 6, 1, 7, 5};
+        final int[] pc2 = {0, 1, 5, 2, 6, 3, 7, 4, 9, 8};
+        final int[] pc1 = {2, 4, 1, 6, 3, 9, 0, 8, 7, 5};
         final int[] p4 = {1, 3, 2, 0};
 
 
@@ -70,7 +70,7 @@ public class SdesUtility {
         // Permute 10 bits of key by P10
         inter = P10KEY;
         bits[inter] = (SdesOperations) key.clone();
-        bits[inter].permute(p10);
+        bits[inter].permute(pc1);
 
         // Circular left shift, once, on each half
         inter = SHIFTKEY5;
@@ -81,7 +81,7 @@ public class SdesUtility {
         // P8 permutation, drop leading two bits, result is K1
         inter = P8KEY1;
         bits[inter] = (SdesOperations) bits[SHIFTKEY5].clone();
-        bits[inter].permute(p8);
+        bits[inter].permute(pc2);
         bits[inter].remove(0);
         bits[inter].remove(0);
 
@@ -96,7 +96,7 @@ public class SdesUtility {
         // P8 permutation, drop leading two bits, result is K2
         inter = P8KEY2;
         bits[inter] = (SdesOperations) bits[SHIFTKEY2].clone();
-        bits[inter].permute(p8);
+        bits[inter].permute(pc2);
         bits[inter].remove(0);
         bits[inter].remove(0);
 
@@ -243,7 +243,7 @@ public class SdesUtility {
         // Apply the inverse of P10 to finish
         inter = IPINV;
         bits[inter] = (SdesOperations) bits[REPLACELEFTR2].clone();
-        bits[inter].permute(ipinv);
+        bits[inter].permute(ip_inverse);
 
         return bits[inter].toString();
     }
