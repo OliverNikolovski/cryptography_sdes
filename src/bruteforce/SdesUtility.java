@@ -47,6 +47,7 @@ public class SdesUtility {
     public static final int IPINV = 31;
     public static final int NUM_STEPS = 32;
 
+    // ovaa funkcija e prezema od http://buzzard.ups.edu/sdes/sdes.html
     public static String encrypt(String messageAsString, String keyAsString) {
         SdesOperations message = SdesOperations.of(messageAsString);
         SdesOperations key = SdesOperations.of(keyAsString);
@@ -259,7 +260,9 @@ public class SdesUtility {
         return possibleKeys;
     }
 
-    // pads key with zeroes from the left
+    // pads key with zeroes from the left if the key is less than 10 bits
+    // because the key must be 10 bits long
+    // otherwise an error will occur
     private static String paddedKey(String key) {
         return String.format("%10s", key).replace(' ', '0');
     }
